@@ -62,7 +62,7 @@ class LoginScreen extends GetView {
   }
 
   _mainScreen(BuildContext context) {
-    final containerSize = MediaQuery.of(context).size * 0.65;
+    final containerSize = MediaQuery.of(context).size * 0.69;
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Container(
@@ -82,7 +82,7 @@ class LoginScreen extends GetView {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: EdgeInsets.all(18),
+                padding: EdgeInsets.all(10),
                 child: _imageField(context),
               ),
               vGap(10),
@@ -92,7 +92,7 @@ class LoginScreen extends GetView {
               _buttonView(context),
               vGap(10),
               _signupView(context),
-              vGap(20),
+              vGap(12),
               _onlineverification(context),
               // vGap(20),
             ],
@@ -139,22 +139,25 @@ class LoginScreen extends GetView {
   }
 
   _buttonView(BuildContext context) {
-    return ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: darkBlue,
-          fixedSize: const Size(315, 30),
-          padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 10),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: darkBlue,
+            fixedSize: const Size(315, 30),
+            padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 10),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
-        ),
-        onPressed: () {
-          Get.offAndToNamed(AppRoutes.homescreen);
-        },
-        child: Text(
-          'Login',
-          style: MontserratStyles.montserratMediumTextStyle(size: 20),
-        ));
+          onPressed: () {
+            Get.offAndToNamed(AppRoutes.homescreen);
+          },
+          child: Text(
+            'Login',
+            style: MontserratStyles.montserratMediumTextStyle(size: 20),
+          )),
+    );
   }
 
   _forgotPasswordView(BuildContext context) {

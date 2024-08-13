@@ -9,10 +9,11 @@ class MenuScreen extends GetView<HomeScreenController> {
   final List<Widget> buttons = <Widget>[
     InkWell(
       onTap: () {
-        Get.toNamed(AppRoutes.homescreen);
+        // print('tapped');
+        Get.toNamed(AppRoutes.placeView);
       },
       child: const Text(
-        "Saved Places",
+        "Places",
         style: TextStyle(color: Colors.white),
       ),
     ),
@@ -38,10 +39,17 @@ class MenuScreen extends GetView<HomeScreenController> {
       ),
     ),
     InkWell(
-      onTap: () {},
-      child: const Text(
-        "Help",
-        style: TextStyle(color: Colors.white),
+      splashColor: Colors.blue.withOpacity(0.5),
+      highlightColor: Colors.blue.withOpacity(0.3),
+      onTap: () {
+        print("tapped hello");
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: const Text(
+          "Help",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
     )
   ];
@@ -50,7 +58,7 @@ class MenuScreen extends GetView<HomeScreenController> {
     return Scaffold(
       backgroundColor: appcolor,
       body: Container(
-        color: appcolor,
+        color: appcolor.withOpacity(0.7),
         child: Column(
           children: [
             // Circular Avatar for Image
@@ -73,7 +81,7 @@ class MenuScreen extends GetView<HomeScreenController> {
                     height: 40,
                     width: 170,
                     decoration: BoxDecoration(
-                      color: darkBlue,
+                      color: appcolor,
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(color: Colors.white),
                     ),
@@ -89,7 +97,7 @@ class MenuScreen extends GetView<HomeScreenController> {
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: darkBlue,
+                  backgroundColor: appcolor,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 75, vertical: 10),
                   shape: RoundedRectangleBorder(

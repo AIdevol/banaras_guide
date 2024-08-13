@@ -328,8 +328,8 @@ class MainScreenWidget extends GetView<HomeScreenController> {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: controller.cardColors[index],
                   ),
+                  child: controller.cardColors[index],
                 ),
               );
             },

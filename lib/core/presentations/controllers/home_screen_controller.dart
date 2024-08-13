@@ -16,12 +16,36 @@ class HomeScreenController extends GetxController {
     // Implement your search logic here
     print('Searching for: $value');
   }
-  
-final List<Color> cardColors = [
-    Colors.amber,
-    Colors.blue,
-    Colors.green,
-    Colors.red,
+
+  final List<Widget> cardColors = [
+    InkWell(
+      onTap: () {
+        print('tapped');
+      },
+      child: Image.network(
+          "https://images.deccanherald.com/deccanherald%2Fimport%2Fsites%2Fdh%2Ffiles%2Fgallery_images%2F2021%2F12%2F13%2Ffile7it39sqcijbouyq81z6.jpg?auto=format%2Ccompress&fmt=webp&fit=max&format=webp&q=70&w=900&dpr=1.3"),
+    ),
+    InkWell(
+      onTap: () {
+        print('tapped 2');
+      },
+      child: Image.network(
+          "https://upload.wikimedia.org/wikipedia/commons/1/1e/BHU_Main_Gate%2C_Banaras_Hindu_University.jpg"),
+    ),
+    InkWell(
+      onTap: () {
+        print('tapped 3');
+      },
+      child: Image.network(
+          "https://www.holidify.com/images/cmsuploads/compressed/SankatMochanHanumanTemple_20200228154607_20200228154630.jpg"),
+    ),
+    InkWell(
+      onTap: () {
+        print('tapped 4');
+      },
+      child: Image.network(
+          "https://images.unsplash.com/photo-1708961370545-5f00499a1808?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmFyYW5hc2l8ZW58MHx8MHx8fDA%3D"),
+    ),
   ];
 
   final List placesList = [

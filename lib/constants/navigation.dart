@@ -3,4 +3,6 @@ abstract class AppRoutes {
   static const homescreen = '/homescreen';
   static const loginscreen = '/loginscreen';
   static const registerScreen = '/registerscreen';
+  static const placeView = '/place';
+  static const favouritescreen = '/favourite';
 }
