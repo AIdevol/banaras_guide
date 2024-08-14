@@ -5,4 +5,5 @@ abstract class AppRoutes {
   static const registerScreen = '/registerscreen';
   static const placeView = '/place';
   static const favouritescreen = '/favourite';
+  static const profilescreen = '/profile';
 }

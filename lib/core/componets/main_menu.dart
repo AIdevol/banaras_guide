@@ -18,7 +18,9 @@ class MenuScreen extends GetView<HomeScreenController> {
       ),
     ),
     InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(AppRoutes.profilescreen);
+      },
       child: const Text(
         "Profile",
         style: TextStyle(color: Colors.white),
