@@ -143,7 +143,7 @@ class LoginScreen extends GetView {
       padding: const EdgeInsets.all(12.0),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: darkBlue,
+            backgroundColor: appcolor,
             fixedSize: const Size(315, 30),
             padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 10),
             shape: RoundedRectangleBorder(

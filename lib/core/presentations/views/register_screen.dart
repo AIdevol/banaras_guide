@@ -5,11 +5,12 @@ import 'package:get/get.dart';
 import 'package:guide_banaras/constants/colors.dart';
 import 'package:guide_banaras/constants/extensions/extention_validate.dart';
 import 'package:guide_banaras/constants/images.dart';
+import 'package:guide_banaras/core/presentations/controllers/register_screen_controller.dart';
 import 'package:guide_banaras/utilities/google_textfields.dart';
 import 'package:guide_banaras/utilities/helper_widgets.dart';
 import 'package:guide_banaras/utilities/text_fields_decorative.dart';
 
-class RegisterScreen extends GetView {
+class RegisterScreen extends GetView<RegisterScreenController> {
   const RegisterScreen({super.key});
 
   @override
@@ -18,22 +19,26 @@ class RegisterScreen extends GetView {
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false, // Add this line
 
-        body: SafeArea(
-          child: Stack(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: MyAnnotatedRegion(
+          child: GetBuilder<RegisterScreenController>(
+            builder: (controller) => SafeArea(
+              child: Stack(
                 children: [
-                  _upperContainer(context),
-                  _downContainer(context),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      _upperContainer(context),
+                      _downContainer(context),
+                    ],
+                  ),
+                  Positioned(
+                      left: MediaQuery.of(context).size.height * 0.01,
+                      right: MediaQuery.of(context).size.height * 0.01,
+                      top: MediaQuery.of(context).size.height * 0.10,
+                      child: _mainScreen(context))
                 ],
               ),
-              Positioned(
-                  left: MediaQuery.of(context).size.height * 0.01,
-                  right: MediaQuery.of(context).size.height * 0.01,
-                  top: MediaQuery.of(context).size.height * 0.10,
-                  child: _mainScreen(context))
-            ],
+            ),
           ),
         ));
   }
@@ -147,7 +152,7 @@ class RegisterScreen extends GetView {
         padding: const EdgeInsets.all(12.0),
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: darkBlue,
+              backgroundColor: appcolor,
               fixedSize: const Size(315, 30),
               padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 10),
               shape: RoundedRectangleBorder(

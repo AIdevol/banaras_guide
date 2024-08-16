@@ -10,6 +10,7 @@ import 'package:guide_banaras/core/presentations/views/login_screen.dart';
 import 'package:guide_banaras/core/presentations/views/places_view_screen.dart';
 import 'package:guide_banaras/core/presentations/views/profile_view_screen.dart';
 import 'package:guide_banaras/core/presentations/views/register_screen.dart';
+import 'package:guide_banaras/core/presentations/views/settings_screen_view.dart';
 import 'package:guide_banaras/core/screen_launcher/bindings/screen_launcher_bindings.dart';
 import 'package:guide_banaras/core/screen_launcher/view/screen_launcher.dart';
 
@@ -50,5 +51,10 @@ class AppPage {
         name: AppRoutes.profilescreen,
         binding: ScreenBinding(),
         page: () => const ProfileViewScreen()),
+
+    GetPage(
+    name: AppRoutes.settingsScreen, 
+    binding: ScreenBinding(),
+    page:  ()=>  SettingsScreenView()),
   ];
 }

@@ -5,6 +5,8 @@ import 'package:guide_banaras/core/presentations/controllers/login_screen_contro
 import 'package:guide_banaras/core/presentations/controllers/places_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/profile_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/register_screen_controller.dart';
+import 'package:guide_banaras/core/presentations/controllers/seetings_view_controller.dart';
+import 'package:guide_banaras/core/presentations/views/settings_screen_view.dart';
 
 class ScreenBinding extends Bindings {
   @override
@@ -13,7 +15,9 @@ class ScreenBinding extends Bindings {
     Get.lazyPut<HomeScreenController>(() => HomeScreenController());
     Get.lazyPut<RegisterScreenController>(() => RegisterScreenController());
     Get.lazyPut<PlacesScreenController>(() => PlacesScreenController());
-    Get.lazyPut<FavouriteElementScreenController>(() => FavouriteElementScreenController());
-     Get.lazyPut<ProfileScreenController>(() => ProfileScreenController());
+    Get.lazyPut<FavouriteElementScreenController>(
+        () => FavouriteElementScreenController());
+    Get.lazyPut<ProfileScreenController>(() => ProfileScreenController());
+    Get.lazyPut<SettingsViewController>(() => SettingsViewController());
   }
 }
