@@ -21,7 +21,21 @@ class PlacesScreenController extends GetxController {
       // Load actual images into the list
       placeImage.addAll([
         InkWell(
-          onTap: () {},
+          onTap: () {
+            Get.dialog(
+              AlertDialog(
+                title: const Text('Kashi Vishwanath Temple'),
+                content: const Text(
+                    'Kashi Vishwanath Temple is one of the most famous Hindu temples dedicated to Lord Shiva. It is located in Varanasi, Uttar Pradesh, India. The temple stands on the western bank of the holy river Ganga, and is one of the twelve Jyotirlingas, the holiest of Shiva temples.'),
+                actions: [
+                  TextButton(
+                    child: Text('Close'),
+                    onPressed: () => Get.back(),
+                  ),
+                ],
+              ),
+            );
+          },
           child: Image.network(kashitemple),
         ),
         InkWell(

@@ -1,18 +1,37 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localization/flutter_localization.dart';
 import 'package:get/get.dart';
 
 class SettingsViewController extends GetxController {
-  final Rx<ThemeMode> themeMode = ThemeMode.system.obs;
-  final RxString currentLanguage = FlutterLocalization.instance.currentLocale.toString().obs;
+  bool isDarkMode = false;
+  bool isNotificationsEnabled = true; // Notifications toggle
+  double fontSize = 16.0; // Font size
 
-  void setThemeMode(ThemeMode mode) {
-    themeMode.value = mode;
-    Get.changeThemeMode(mode);
+  String selectedLanguage = "English";
+  List<String> languages = ["English", "Hindi", "Spanish", "French"];
+
+  void toggleDarkMode(bool value) {
+    isDarkMode = value;
+    update(); // Notify the UI
   }
 
-  void setLanguage(String languageCode) {
-    FlutterLocalization.instance.translate(languageCode);
-    currentLanguage.value = languageCode;
+  void toggleNotifications(bool value) {
+    isNotificationsEnabled = value;
+    update(); // Notify the UI
   }
+
+  void updateFontSize(double value) {
+    fontSize = value;
+    update(); // Notify the UI
+  }
+
+  void updateLanguage(String? language) {
+    if (language != null) {
+      selectedLanguage = language;
+      update();
+    }
+  }
+
+  // void logout() {
+  //   // Perform logout logic
+  //   Get.offAll(LoginScreenView());
+  // }
 }

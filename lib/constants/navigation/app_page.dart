@@ -7,6 +7,7 @@ import 'package:guide_banaras/core/presentations/controllers/profile_screen_cont
 import 'package:guide_banaras/core/presentations/views/favourite_element_screen.dart';
 import 'package:guide_banaras/core/presentations/views/home_screen.dart';
 import 'package:guide_banaras/core/presentations/views/login_screen.dart';
+import 'package:guide_banaras/core/presentations/views/nottifications.dart';
 import 'package:guide_banaras/core/presentations/views/places_view_screen.dart';
 import 'package:guide_banaras/core/presentations/views/profile_view_screen.dart';
 import 'package:guide_banaras/core/presentations/views/register_screen.dart';
@@ -48,13 +49,19 @@ class AppPage {
       page: () => const FavouriteElementScreen(),
     ),
     GetPage(
-        name: AppRoutes.profilescreen,
-        binding: ScreenBinding(),
-        page: () => const ProfileViewScreen()),
-
+      name: AppRoutes.profilescreen,
+      binding: ScreenBinding(),
+      page: () => const ProfileViewScreen(),
+    ),
     GetPage(
-    name: AppRoutes.settingsScreen, 
-    binding: ScreenBinding(),
-    page:  ()=>  SettingsScreenView()),
+      name: AppRoutes.settingsScreen,
+      binding: ScreenBinding(),
+      page: () => const SettingsScreenView(),
+    ),
+    GetPage(
+      name: AppRoutes.notifications,
+      binding: ScreenBinding(),
+      page: () => const Notifications(),
+    ),
   ];
 }

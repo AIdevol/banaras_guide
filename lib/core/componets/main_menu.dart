@@ -162,7 +162,7 @@ class MenuScreen extends GetView<HomeScreenController> {
     InkWell(
       onTap: () {},
       child: const Text(
-        "Suggetions",
+        "About us",
         style: TextStyle(color: Colors.white),
       ),
     ),
@@ -258,6 +258,7 @@ class MenuScreen extends GetView<HomeScreenController> {
                 size: 25,
               ),
               onPressed: () {
+                Get.toNamed(AppRoutes.notifications);
                 print('Notifications tapped');
               },
             ),
