@@ -13,7 +13,7 @@ class FavouriteElementScreenController extends GetxController {
   void removeFavorite(int index) {
     // Remove the favorite from the original list in PlacesScreenController
     placesController.favoritePlaces.removeAt(index);
-    // Update the PlacesScreenController and the current controller
+   
     placesController.update();
     update();
   }

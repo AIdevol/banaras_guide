@@ -194,4 +194,8 @@ class FavouriteElementScreen extends GetView<FavouriteElementScreenController> {
       ),
     );
   }
+
+  _showDialogue(BuildContext context) {
+    return;
+  }
 }
