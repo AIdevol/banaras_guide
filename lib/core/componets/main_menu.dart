@@ -160,7 +160,9 @@ class MenuScreen extends GetView<HomeScreenController> {
       ),
     ),
     InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(AppRoutes.aboutUs);
+      },
       child: const Text(
         "About us",
         style: TextStyle(color: Colors.white),

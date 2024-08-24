@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:guide_banaras/constants/colors.dart';
 import 'package:guide_banaras/core/presentations/controllers/favourite_element_screen_controller.dart';
@@ -178,7 +179,8 @@ class FavouriteElementScreen extends GetView<FavouriteElementScreenController> {
                                       color: Colors.red,
                                     ),
                                     onPressed: () {
-                                      controller.removeFavorite(index);
+                                      _showDialogue(context, index);
+                                      // controller.removeFavorite(index);
                                     },
                                   ),
                                 ],
@@ -195,7 +197,52 @@ class FavouriteElementScreen extends GetView<FavouriteElementScreenController> {
     );
   }
 
-  _showDialogue(BuildContext context) {
-    return;
+  _showDialogue(BuildContext context, int index) {
+    // final int indexI = Get.find<FavouriteElementScreenController>().removeFavorite;
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              backgroundColor: appcolor,
+              content: Text(
+                'Delete your Favourite place',
+                style: MontserratStyles.montserratMediumTextStyle(
+                    size: 16, color: Colors.black),
+              ),
+              actions: [
+                Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(25)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        child: Text(
+                          'Cancel',
+                          style: MontserratStyles.montserratMediumTextStyle(
+                              size: 15, color: darkBlue),
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Get.find<FavouriteElementScreenController>()
+                              .removeFavorite
+                              .obs;
+                          Get.back();
+                          controller.removeFavorite(index);
+                        },
+                        child: Text(
+                          'Yes',
+                          style: MontserratStyles.montserratMediumTextStyle(
+                              size: 15, color: darkBlue),
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ));
   }
 }

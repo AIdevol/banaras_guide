@@ -4,6 +4,7 @@ import 'package:guide_banaras/constants/navigation.dart';
 import 'package:guide_banaras/core/presentations/bindings/bindings.dart';
 import 'package:guide_banaras/core/presentations/controllers/places_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/profile_screen_controller.dart';
+import 'package:guide_banaras/core/presentations/views/about_us_screen.dart';
 import 'package:guide_banaras/core/presentations/views/favourite_element_screen.dart';
 import 'package:guide_banaras/core/presentations/views/home_screen.dart';
 import 'package:guide_banaras/core/presentations/views/login_screen.dart';
@@ -62,6 +63,11 @@ class AppPage {
       name: AppRoutes.notifications,
       binding: ScreenBinding(),
       page: () => const Notifications(),
+    ),
+    GetPage(
+      name: AppRoutes.aboutUs,
+      binding: ScreenBinding(),
+      page: () => const AboutUsScreen(),
     ),
   ];
 }
