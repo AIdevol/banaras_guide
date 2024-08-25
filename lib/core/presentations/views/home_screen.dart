@@ -165,7 +165,7 @@ class MainScreenWidget extends GetView<HomeScreenController> {
                       // Overlay with appcolor
                       Positioned.fill(
                         child: Container(
-                          padding: EdgeInsets.only(top: 28),
+                          padding: const EdgeInsets.only(top: 28),
                           alignment: Alignment.topCenter,
                           color: appcolor.withOpacity(0.9),
                           child: _titleViewHeading(context),

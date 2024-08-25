@@ -10,13 +10,18 @@ class AboutUsScreen extends GetView<AboutUsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appcolor,
-      appBar: AppBar(
-        title: Text(
-          'About_Us',
-          style: MontserratStyles.montserratSemiBoldTextStyle(size: 16),
+        backgroundColor: appcolor,
+        appBar: AppBar(
+          title: Text(
+            'About_Us',
+            style: MontserratStyles.montserratSemiBoldTextStyle(size: 16),
+          ),
         ),
-      ),
-    );
+        body: Center(
+          child: Text(
+            'About us',
+            style: MontserratStyles.montserratSemiBoldTextStyle(size: 16),
+          ),
+        ));
   }
 }
