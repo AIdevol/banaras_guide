@@ -31,7 +31,7 @@ class LoginScreen extends GetView {
               Positioned(
                   left: MediaQuery.of(context).size.height * 0.01,
                   right: MediaQuery.of(context).size.height * 0.01,
-                  top: MediaQuery.of(context).size.height * 0.15,
+                  top: MediaQuery.of(context).size.height * 0.10,
                   child: _mainScreen(context))
             ],
           ),
@@ -62,7 +62,7 @@ class LoginScreen extends GetView {
   }
 
   _mainScreen(BuildContext context) {
-    final containerSize = MediaQuery.of(context).size * 0.69;
+    final containerSize = MediaQuery.of(context).size * 0.65;
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: Container(
@@ -78,11 +78,10 @@ class LoginScreen extends GetView {
                     blurRadius: 0.03,
                     blurStyle: BlurStyle.outer)
               ]),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
+          child: ListView(
             children: [
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(18.0),
                 child: _imageField(context),
               ),
               vGap(10),

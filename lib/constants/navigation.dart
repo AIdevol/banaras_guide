@@ -11,4 +11,6 @@ abstract class AppRoutes {
   static const notifications = '/notifications';
   static const aboutUs = '/aboutus';
   static const helpCenter = '/help';
+  static const otp = '/otp';
+  static const resetpass = '/resetpass';
 }

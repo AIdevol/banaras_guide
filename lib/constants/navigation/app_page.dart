@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:guide_banaras/constants/navigation.dart';
+import 'package:guide_banaras/core/otp/bindings/otp_bindings.dart';
+import 'package:guide_banaras/core/otp/view/otp_screen.dart';
 import 'package:guide_banaras/core/presentations/bindings/bindings.dart';
 import 'package:guide_banaras/core/presentations/controllers/places_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/profile_screen_controller.dart';
@@ -14,6 +16,7 @@ import 'package:guide_banaras/core/presentations/views/nottifications.dart';
 import 'package:guide_banaras/core/presentations/views/places_view_screen.dart';
 import 'package:guide_banaras/core/presentations/views/profile_view_screen.dart';
 import 'package:guide_banaras/core/presentations/views/register_screen.dart';
+import 'package:guide_banaras/core/presentations/views/reset_password_screen.dart';
 import 'package:guide_banaras/core/presentations/views/settings_screen_view.dart';
 import 'package:guide_banaras/core/screen_launcher/bindings/screen_launcher_bindings.dart';
 import 'package:guide_banaras/core/screen_launcher/view/screen_launcher.dart';
@@ -26,6 +29,10 @@ class AppPage {
       binding: SplashBinding(),
       page: () => const ScreenLauncher(),
     ),
+    GetPage(
+        name: AppRoutes.otp,
+        binding: OtpBindings(),
+        page: () => const OtpScreen()),
     GetPage(
       name: AppRoutes.loginscreen,
       binding: ScreenBinding(),
@@ -74,12 +81,17 @@ class AppPage {
     GetPage(
       name: AppRoutes.helpCenter,
       binding: ScreenBinding(),
-      page: () =>  HelpCenter(),
+      page: () => HelpCenter(),
     ),
     GetPage(
       name: AppRoutes.forgotpass,
       binding: ScreenBinding(),
-      page: () =>  ForgotPasswordScreen(),
+      page: () => ForgotPasswordScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.resetpass,
+      binding: ScreenBinding(),
+      page: () => ResetPasswordScreen(),
     ),
   ];
 }

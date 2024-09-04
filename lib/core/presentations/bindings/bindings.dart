@@ -9,6 +9,7 @@ import 'package:guide_banaras/core/presentations/controllers/notificaitons_contr
 import 'package:guide_banaras/core/presentations/controllers/places_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/profile_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/register_screen_controller.dart';
+import 'package:guide_banaras/core/presentations/controllers/reset_password_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/seetings_view_controller.dart';
 import 'package:guide_banaras/core/presentations/views/settings_screen_view.dart';
 
@@ -27,5 +28,6 @@ class ScreenBinding extends Bindings {
     Get.lazyPut<AboutUsController>(() => AboutUsController());
     Get.lazyPut<HelpSectionController>(() => HelpSectionController());
     Get.lazyPut<ForgotPasswordController>(() => ForgotPasswordController());
+    Get.lazyPut<ResetPasswordController>(() => ResetPasswordController());
   }
 }
