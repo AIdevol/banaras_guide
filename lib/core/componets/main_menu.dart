@@ -173,6 +173,7 @@ class MenuScreen extends GetView<HomeScreenController> {
       highlightColor: Colors.blue.withOpacity(0.3),
       onTap: () {
         print("tapped hello");
+        Get.toNamed(AppRoutes.helpCenter);
       },
       child: Container(
         padding: EdgeInsets.all(10),

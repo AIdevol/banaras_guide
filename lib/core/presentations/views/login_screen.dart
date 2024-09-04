@@ -165,7 +165,9 @@ class LoginScreen extends GetView {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoutes.forgotpass);
+            },
             child: Text(
               'Forgot Password',
               style: MontserratStyles.montserratRegularTextStyle(

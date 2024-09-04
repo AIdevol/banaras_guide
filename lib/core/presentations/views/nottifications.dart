@@ -19,9 +19,7 @@ class Notifications extends GetView {
         ),
       ),
       body: GetBuilder<NotificaitonsController>(
-        builder: (controller) => Container(
-          child: Center(child: Text('Notifications..')),
-        ),
+        builder: (controller) => Center(child: Text('Notifications..', style: MontserratStyles.montserratMediumTextStyle(color: Colors.white))),
       ),
     );
   }

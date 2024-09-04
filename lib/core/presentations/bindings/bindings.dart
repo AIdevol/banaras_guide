@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:guide_banaras/core/presentations/controllers/about_us_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/favourite_element_screen_controller.dart';
+import 'package:guide_banaras/core/presentations/controllers/forgot_password_controller.dart';
+import 'package:guide_banaras/core/presentations/controllers/help_section_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/home_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/login_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/controllers/notificaitons_controller.dart';
@@ -21,7 +23,9 @@ class ScreenBinding extends Bindings {
         () => FavouriteElementScreenController());
     Get.lazyPut<ProfileScreenController>(() => ProfileScreenController());
     Get.lazyPut<SettingsViewController>(() => SettingsViewController());
-     Get.lazyPut<NotificaitonsController>(() => NotificaitonsController());
-      Get.lazyPut<AboutUsController>(() => AboutUsController());
+    Get.lazyPut<NotificaitonsController>(() => NotificaitonsController());
+    Get.lazyPut<AboutUsController>(() => AboutUsController());
+    Get.lazyPut<HelpSectionController>(() => HelpSectionController());
+    Get.lazyPut<ForgotPasswordController>(() => ForgotPasswordController());
   }
 }

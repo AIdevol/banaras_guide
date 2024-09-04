@@ -6,6 +6,8 @@ import 'package:guide_banaras/core/presentations/controllers/places_screen_contr
 import 'package:guide_banaras/core/presentations/controllers/profile_screen_controller.dart';
 import 'package:guide_banaras/core/presentations/views/about_us_screen.dart';
 import 'package:guide_banaras/core/presentations/views/favourite_element_screen.dart';
+import 'package:guide_banaras/core/presentations/views/forgot_password_screen.dart';
+import 'package:guide_banaras/core/presentations/views/help_center.dart';
 import 'package:guide_banaras/core/presentations/views/home_screen.dart';
 import 'package:guide_banaras/core/presentations/views/login_screen.dart';
 import 'package:guide_banaras/core/presentations/views/nottifications.dart';
@@ -68,6 +70,16 @@ class AppPage {
       name: AppRoutes.aboutUs,
       binding: ScreenBinding(),
       page: () => const AboutUsScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.helpCenter,
+      binding: ScreenBinding(),
+      page: () =>  HelpCenter(),
+    ),
+    GetPage(
+      name: AppRoutes.forgotpass,
+      binding: ScreenBinding(),
+      page: () =>  ForgotPasswordScreen(),
     ),
   ];
 }

@@ -7,6 +7,8 @@ abstract class AppRoutes {
   static const favouritescreen = '/favourite';
   static const profilescreen = '/profile';
   static const settingsScreen = '/settings';
+  static const forgotpass = '/forgotpass';
   static const notifications = '/notifications';
   static const aboutUs = '/aboutus';
+  static const helpCenter = '/help';
 }
