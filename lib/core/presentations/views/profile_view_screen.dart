@@ -40,7 +40,7 @@ class ProfileViewScreen extends GetView<ProfileScreenController> {
   }
 
   _mainScreen(BuildContext context) {
-    final containerSize = MediaQuery.of(context).size * 0.80;
+    final containerSize = MediaQuery.of(context).size * 0.90;
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Container(

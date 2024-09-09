@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
@@ -5,6 +8,25 @@ import 'package:get/get.dart';
 class HomeScreenController extends GetxController {
   final zoomDrawerController = ZoomDrawerController();
   final searchController = TextEditingController();
+  final swiperController = SwiperController();
+  // late SwiperController swiperController;
+  late PageController pageController;
+  // List<Widget> cardColors = []; // Your list of card widgets
+  int currentIndex = 0;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // swiperController = SwiperController();
+    pageController = PageController(viewportFraction: 0.6, initialPage: 0);
+  }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+    // swiperController.dispose();
+    super.onClose();
+  }
 
   void toggleDrawer() {
     print("Toggle drawer");
@@ -13,9 +35,21 @@ class HomeScreenController extends GetxController {
   }
 
   void handleSearch(String value) {
-    // Implement your search logic here
     print('Searching for: $value');
   }
+
+
+
+// void startAutoScroll() {
+//   Timer.periodic(Duration(seconds: 3), (timer) {
+
+//     if (currentPage.value < 9) {
+//       currentPage.value++;
+//     } else {
+//       currentPage.value = 0;
+//     }
+//   });
+// }
 
   final List<Widget> cardColors = [
     InkWell(
@@ -114,4 +148,20 @@ class HomeScreenController extends GetxController {
           "https://kashibanaras.com/wp-content/uploads/2021/10/Kaal-Bhairav-Templ.jpg"),
     ),
   ];
+
+  void nextCard() {
+    if (currentIndex < cardColors.length - 1) {
+      currentIndex++;
+      swiperController.move(currentIndex);
+      update();
+    }
+  }
+
+  void previousCard() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      swiperController.move(currentIndex);
+      update();
+    }
+  }
 }

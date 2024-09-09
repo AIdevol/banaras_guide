@@ -1,6 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -8,6 +9,7 @@ import 'package:guide_banaras/constants/colors.dart';
 import 'package:guide_banaras/constants/images.dart';
 import 'package:guide_banaras/core/componets/main_menu.dart';
 import 'package:guide_banaras/core/presentations/controllers/home_screen_controller.dart';
+import 'package:guide_banaras/utilities/auto_scrolling_animation.dart';
 import 'package:guide_banaras/utilities/google_textfields.dart';
 import 'package:guide_banaras/utilities/helper_widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -169,6 +171,7 @@ class MainScreenWidget extends GetView<HomeScreenController> {
                           alignment: Alignment.topCenter,
                           color: appcolor.withOpacity(0.9),
                           child: _titleViewHeading(context),
+                            // Row(children: [_titleViewHeading(context),IconButton(onPressed: (){}, icon: Icon(Icons.map))],)
                         ),
                       ),
                     ],
@@ -195,11 +198,14 @@ class MainScreenWidget extends GetView<HomeScreenController> {
                 ),
               ),
             ),
+
             Positioned(
               top: screenSize.height * 0.35 - searchScreenSize.height / 2,
               left: screenSize.width * 0.025,
               right: searchScreenSize.width * 0.12,
-              child: _searchScreen(context, searchScreenSize),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [_searchScreen(context, searchScreenSize),_buildContainer(context, searchScreenSize) ],),
             ),
           ],
         ),
@@ -207,10 +213,27 @@ class MainScreenWidget extends GetView<HomeScreenController> {
     );
   }
 
+  _buildContainer(BuildContext context,Size searchScreenSize){
+    return GestureDetector(
+      onTap: (){
+        print('hellow bhai tapped krke jao na');
+      },
+      child: Container(
+        height: searchScreenSize.height * 0.20,
+        width: searchScreenSize.width * 0.50,
+          decoration: BoxDecoration(color: lightwh8$gray,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [BoxShadow(color: Colors.grey, spreadRadius: 0.3)],),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: SvgPicture.asset('assets/route-solid.svg'),
+          ),),
+    );
+  }
   _searchScreen(BuildContext context, Size searchScreenSize) {
     return Container(
       height: searchScreenSize.height * 0.20,
-      width: searchScreenSize.width * 3,
+      width: searchScreenSize.width * 2.5,
       decoration: BoxDecoration(
         color: lightwh8$gray,
         borderRadius: BorderRadius.circular(8),
@@ -237,14 +260,9 @@ class MainScreenWidget extends GetView<HomeScreenController> {
         style: MontserratStyles.montserratBoldTextStyle(size: 20)));
   }
 
-  _boxViewbuild(BuildContext context) {
+  Widget _boxViewbuild(BuildContext context) {
     double containerHeight = MediaQuery.of(context).size.height * 0.2;
-    double listViewHeight = containerHeight + 20;
     final HomeScreenController controllerList = HomeScreenController();
-
-    // Create a PageController
-    final PageController controller =
-        PageController(viewportFraction: 0.6, initialPage: 0);
 
     return Padding(
       padding: const EdgeInsets.only(top: 40),
@@ -266,40 +284,52 @@ class MainScreenWidget extends GetView<HomeScreenController> {
           ),
           SizedBox(
             height: 250,
-            child: PageView.builder(
-              controller: controller,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                    top: 20,
-                    bottom: 20,
-                    right: 10,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      print('hello');
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      height: containerHeight * 0.3,
-                      width: containerHeight * 0.3,
-                      decoration: BoxDecoration(
-                        color: Colors.white60,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.white),
+            child: AutoScrollingPageView(
+              itemCount: controllerList.placesList.length,
+              itemBuilder: (BuildContext context, int index, PageController pageController) {
+                return AnimatedBuilder(
+                  animation: pageController,
+                  builder: (context, child) {
+                    double value = 1.0;
+                    if (pageController.position.haveDimensions) {
+                      value = pageController.page! - index;
+                      value = (1 - (value.abs() * 0.5)).clamp(0.0, 1.0);
+                    }
+                    return Transform.scale(
+                      scale: Curves.easeOut.transform(value),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 20,
+                          bottom: 20,
+                          right: 10,
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            print('Tapped item $index');
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: containerHeight * 0.4,
+                            width: containerHeight * 0.4,
+                            decoration: BoxDecoration(
+                              color: Colors.white60,
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.white),
+                            ),
+                            child: controllerList.placesList[index],
+                          ),
+                        ),
                       ),
-                      child: controllerList.placesList[index],
-                    ),
-                  ),
+                    );
+                  },
                 );
               },
             ),
           ),
           const Gap(10),
           SmoothPageIndicator(
-            controller: controller,
-            count: 10, // Number of pages
+            controller: controller.pageController,
+            count: controllerList.placesList.length,
             effect: const ExpandingDotsEffect(
               activeDotColor: Colors.white,
               dotHeight: 10,
@@ -316,27 +346,51 @@ class MainScreenWidget extends GetView<HomeScreenController> {
     final HomeScreenController controller = HomeScreenController();
     return Padding(
       padding: const EdgeInsets.only(top: 20),
-      child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30),
-          child: Swiper(
-            itemCount: controller.cardColors.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: controller.cardColors[index],
-                ),
-              );
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () {
+              controller.previousCard();
             },
-            itemWidth: MediaQuery.of(context).size.width * 0.8,
-            itemHeight: MediaQuery.of(context).size.height * 0.6,
-            layout: SwiperLayout.STACK,
-          )),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Swiper(
+                itemCount: controller.cardColors.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Container(
+                      // height: ,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: controller.cardColors[index],
+                    ),
+                  );
+                },
+                itemWidth: MediaQuery.of(context).size.width * 0.6,
+                itemHeight: MediaQuery.of(context).size.height * 0.5,
+                layout: SwiperLayout.STACK,
+                controller: controller.swiperController,
+                index: controller.currentIndex,
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
+            onPressed: () {
+              controller.nextCard();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
+

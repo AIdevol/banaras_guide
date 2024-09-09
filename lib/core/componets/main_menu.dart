@@ -186,7 +186,8 @@ class MenuScreen extends GetView<HomeScreenController> {
   ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
+    final ScreenSize = MediaQuery.of(context).size * 0.50;
     return Scaffold(
       backgroundColor: appcolor,
       body: Stack(
@@ -197,7 +198,7 @@ class MenuScreen extends GetView<HomeScreenController> {
               children: [
                 // Circular Avatar for Image
                 const Gap(30),
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.only(top: 100.0),
                   child: CircleAvatar(
                     radius: 60,

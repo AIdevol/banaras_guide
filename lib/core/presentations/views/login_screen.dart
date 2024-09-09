@@ -64,7 +64,7 @@ class LoginScreen extends GetView {
   _mainScreen(BuildContext context) {
     final containerSize = MediaQuery.of(context).size * 0.65;
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.only(top: 40.0,left: 15.0, right: 15.0),
       child: Container(
           height: containerSize.height,
           width: containerSize.width,
