@@ -4,8 +4,10 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
+import '../../ResponseModels/resgister_response_model.dart';
 import '../APIs/api_ends.dart';
 import '../APIs/dio_client.dart';
+import '../APIs/network_exception.dart';
 import '../auth_abstract/auth_abstract_api_services.dart';
 
 class AuthenticationApiServices extends GetxService implements AuthenticationApi{
@@ -37,4 +39,13 @@ class AuthenticationApiServices extends GetxService implements AuthenticationApi
     getDeviceData();
   }
 
+  @override
+  Future<RegisterResponseModel>registerApicall( {Map<String, dynamic>? dataBody})async{
+    try{
+      final response = await dioClient!.post(APIends.register, data:dataBody);
+      return RegisterResponseModel.fromJson(response);
+    }catch(e){
+      return Future.error(NetworkExceptions.getDioException(e));
+    }
+  }
 }

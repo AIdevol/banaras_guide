@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
 import 'package:guide_banaras/constants/colors.dart';
 import 'package:guide_banaras/constants/extensions/extention_validate.dart';
@@ -12,6 +13,8 @@ import 'package:guide_banaras/utilities/text_fields_decorative.dart';
 
 class RegisterScreen extends GetView<RegisterScreenController> {
   const RegisterScreen({super.key});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,28 +91,29 @@ class RegisterScreen extends GetView<RegisterScreenController> {
             children: [
               Padding(
                 padding: EdgeInsets.all(18.0),
-                child: _imageField(context),
+                child: _imageField(context:context),
               ),
               vGap(20),
-              _nameViewField(context),
+              _nameViewField(context:context),
               vGap(20),
-              _emailtextField(context),
+              _emailtextField(context:context),
               vGap(20),
-              _passwordtextField(context),
+              _passwordtextField(context: context),
               vGap(20),
-              _password2textField(context),
+              _password2textField(context: context),
               vGap(20),
 
-              // _genderView(context)
-              _addresstextField(context),
+              _genderView(context: context),
+              vGap(20),
+              _addresstextField(context: context),
               vGap(10),
-              _buttonView(context)
+              _buttonView(context: context)
             ],
           )),
     );
   }
 
-  _imageField(BuildContext context) {
+  _imageField({required BuildContext context}) {
     final imageSize = MediaQuery.of(context).size * 1 / 2;
     return Container(
       alignment: Alignment.center,
@@ -121,33 +125,49 @@ class RegisterScreen extends GetView<RegisterScreenController> {
     );
   }
 
-  _emailtextField(BuildContext context) {
+  _emailtextField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: Icon(FeatherIcons.mail),
         hintText: 'Email'.tr,
         labletext: 'Email'.tr,
       ),
     );
   }
 
-  _passwordtextField(BuildContext cotnext) {
+  _passwordtextField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: Icon(FeatherIcons.lock),
         hintText: 'Password'.tr,
         labletext: 'Password'.tr,
-        // obsecureText: ,
+        controller: controller.passwordController,
+        obsecureText: controller.obsecurePassword ,
+        onFieldSubmitted: (String? value) {
+          FocusScope.of(Get.context ?? context)
+              .requestFocus(controller.password2FocusNode);
+        },
         validator: (value) {
           return value?.validatePassword();
         },
+        suffix: IconButton(onPressed: (){
+          controller.showOrHidePasswordVisibility();
+        },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            icon: controller.obsecurePassword
+                ?const Icon(Icons.visibility_off, color: Colors.grey,):
+            Icon(Icons.visibility, color: appcolor,)),
+        focusNode: controller.passwordFocusNode,
       ),
     );
   }
 
-  _buttonView(BuildContext context) {
+  _buttonView({required BuildContext context}) {
     return Padding(
         padding: const EdgeInsets.all(12.0),
         child: ElevatedButton(
@@ -166,55 +186,94 @@ class RegisterScreen extends GetView<RegisterScreenController> {
             )));
   }
 
-  _nameViewField(BuildContext context) {
+  _nameViewField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: const Icon(FeatherIcons.user),
         hintText: 'Name'.tr,
         labletext: 'Name'.tr,
       ),
     );
   }
 
-  _password2textField(BuildContext cotnext) {
+  _password2textField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
-        hintText: 'Re-Enter Password'.tr,
-        labletext: 'Re-Enter Password'.tr,
-        // obsecureText: ,
+          prefix: const Icon(FeatherIcons.lock),
+        hintText: 'Confirm Password'.tr,
+        labletext: 'Confirm Password'.tr,
+        controller: controller.password2Controller,
+        obsecureText: controller.obsecureConfirmPassword ,
+        textInputType: TextInputType.visiblePassword,
+        textInputAction: TextInputAction.next,
+        onFieldSubmitted: (String? value) {
+          FocusScope.of(Get.context ?? context)
+              .requestFocus(controller.passwordFocusNode);
+        },
         validator: (value) {
           return value?.validatePassword();
         },
-      ),
+          suffix: IconButton(
+              onPressed: () {
+                controller.showOrHideConfirmPasswordVisibility();
+              },
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              icon: controller.obsecureConfirmPassword
+                  ? const Icon(
+                Icons.visibility_off,
+                color: Colors.grey,
+              )
+                  :  Icon(
+                Icons.visibility,
+                color: appcolor,
+              )),
+          focusNode: controller.password2FocusNode)
     );
   }
 
-  _genderView(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Gender' ?? '',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ).paddingOnly(left: 2, bottom: 5),
-        Container(
-            width: Get.width,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-            margin: const EdgeInsets.symmetric(horizontal: 0),
+  _genderView({required BuildContext context}) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Gender', style: MontserratStyles.montserratMediumTextStyle(color: Colors.black),),
+          vGap(07),
+          Container(
+
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.grey.shade100,
-                boxShadow: lightShadow),
-            child: /* verticalDot(context) */ Text("")),
-      ],
+              borderRadius: BorderRadius.circular(25),
+              color: lightwh8$gray,
+              border: Border.all(color: Colors.grey.shade300),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<String>(
+                  value: controller.selectedGender,
+                  isExpanded: true,
+                  hint: Text('Gender'.tr, style: MontserratStyles.montserratMediumTextStyle(color: Colors.grey)),
+                  onChanged: (String? newValue) {
+                    controller.setSelectedGender(newValue!);
+                  },
+                  items: controller.genderType.map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -243,14 +302,43 @@ class RegisterScreen extends GetView<RegisterScreenController> {
   //   controller.update();
   // }
   // );
-  _addresstextField(BuildContext context) {
+  _addresstextField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: Icon(FeatherIcons.mapPin),
         hintText: 'Address'.tr,
         labletext: 'Address'.tr,
       ),
     );
   }
+
+  void _showGenderDropdown(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Select Gender',style: MontserratStyles.montserratMediumTextStyle(size: 20, color: Colors.black87),),
+          content: Container(
+            width: double.minPositive,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: controller.genderType.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  title: Text(controller.genderType[index]),
+                  onTap: () {
+                    controller.setSelectedGender(controller.genderType[index]);
+                    Navigator.of(context).pop();
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
 }
+

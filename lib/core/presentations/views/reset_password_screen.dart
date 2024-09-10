@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:guide_banaras/constants/colors.dart';
@@ -11,7 +12,7 @@ import 'package:guide_banaras/utilities/google_textfields.dart';
 import 'package:guide_banaras/utilities/helper_widgets.dart';
 import 'package:guide_banaras/utilities/text_fields_decorative.dart';
 
-class ResetPasswordScreen extends GetView {
+class ResetPasswordScreen extends GetView<ResetPasswordController>{
   const ResetPasswordScreen({super.key});
 
   @override
@@ -89,7 +90,7 @@ class ResetPasswordScreen extends GetView {
             children: [
               Padding(
                 padding: EdgeInsets.all(18.0),
-                child: _imageField(context),
+                child: _imageField(context: context),
               ),
               // vGap(10),
               Center(
@@ -100,17 +101,17 @@ class ResetPasswordScreen extends GetView {
                 ),
               ),
               vGap(20),
-              _entterPassField(context),
+              _entterPassField(context: context),
               vGap(20),
-              _passwordtextField(context),
+              _passwordtextField(context: context),
               vGap(20),
-              _buttonView(context)
+              _buttonView(context: context)
             ],
           )),
     );
   }
 
-  _imageField(BuildContext context) {
+  _imageField({required BuildContext context}) {
     final imageSize = MediaQuery.of(context).size * 1 / 2;
     return Container(
       alignment: Alignment.center,
@@ -122,33 +123,67 @@ class ResetPasswordScreen extends GetView {
     );
   }
 
-  _entterPassField(BuildContext context) {
+  _entterPassField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: const Icon(FeatherIcons.lock),
         hintText: 'Enter Your Password'.tr,
         labletext: 'Enter Your Password'.tr,
+        controller: controller.passwordController,
+        obsecureText: controller.obsecurePassword,
+        onFieldSubmitted: (String? value) {
+          FocusScope.of(Get.context ?? context)
+              .requestFocus(controller.confirmpasswordFocusNode);
+        },
+        validator: (value) {
+          return value?.validatePassword();
+        },
+        suffix: IconButton(onPressed: (){
+          controller.showOrHidePasswordVisibility();
+        },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            icon: controller.obsecurePassword
+                ?const Icon(Icons.visibility_off, color: Colors.grey,):
+            Icon(Icons.visibility, color: appcolor,)),
       ),
     );
   }
 
-  _passwordtextField(BuildContext cotnext) {
+  _passwordtextField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: Icon(FeatherIcons.lock),
         hintText: 'Re-Enter Your Password'.tr,
         labletext: 'Re-Enter Your Password'.tr,
-        // obsecureText: ,
-        // validator: (value) {
-        //   return value?.validatePassword();
-        // },
+        controller: controller.confirmpasswordController,
+        obsecureText: controller.obsecureConfirmPassword,
+        textInputType: TextInputType.visiblePassword,
+        textInputAction: TextInputAction.next,
+        onFieldSubmitted: (String? value) {
+          FocusScope.of(Get.context ?? context)
+              .requestFocus(controller.passwordFocusNode);
+        },
+        validator: (value) {
+          return value?.validatePassword();
+        },
+        suffix: IconButton(onPressed: (){
+          controller.showOrHideConfirmPasswordVisibility();
+        },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            icon: controller.obsecureConfirmPassword
+                ?const Icon(Icons.visibility_off, color: Colors.grey,):
+            Icon(Icons.visibility, color: appcolor,)),
       ),
     );
   }
 
-  _buttonView(BuildContext context) {
+  _buttonView({required BuildContext context}) {
     return Padding(
         padding: const EdgeInsets.all(12.0),
         child: ElevatedButton(

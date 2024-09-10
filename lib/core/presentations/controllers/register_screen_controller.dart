@@ -16,6 +16,14 @@ class RegisterScreenController extends GetxController{
   bool obsecurePassword = true;
   bool obsecureConfirmPassword = true;
   bool isLoadingLocation = false;
+  // late TextEditingController genderController;
+  // String selectedGender = '';
+  String? selectedGender;
+  List<String> genderType = [
+    "Female",
+    "Male",
+    "Others",
+  ];
 
 
   @override
@@ -25,6 +33,7 @@ class RegisterScreenController extends GetxController{
     passwordController = TextEditingController();
     password2Controller = TextEditingController();
     addressController = TextEditingController();
+    // genderController = TextEditingController();
 
     nameFocusNode = FocusNode();
     emailFocusNode = FocusNode();
@@ -36,14 +45,23 @@ class RegisterScreenController extends GetxController{
 
   @override
   void onClose(){
-emailController.dispose();
-passwordController.dispose();
-emailFocusNode.dispose();
-passwordFocusNode.dispose();
-super.onClose();
+  emailController.dispose();
+  // genderController.dispose();
+  passwordController.dispose();
+  emailFocusNode.dispose();
+  passwordFocusNode.dispose();
+  super.onClose();
   }
 
-
+  // void setSelectedGender(String gender) {
+  //   selectedGender = gender;
+  //   genderController.text = gender;
+  //   update();
+  // }
+  void setSelectedGender(String? gender) {
+    selectedGender = gender;
+    update();
+  }
   showOrHidePasswordVisibility() {
     obsecurePassword = !obsecurePassword;
     update();
@@ -55,5 +73,9 @@ super.onClose();
   }
 
 
+// ===========================================================Registerations APi=====================================
 
+void hitregistrationApicall(){
+    // Get.find
+}
 }

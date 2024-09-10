@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:guide_banaras/constants/colors.dart';
@@ -100,7 +101,7 @@ class OtpScreen extends GetView<OtpScreenController> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _imageField(context),
+              _imageField(context: context),
               vGap(10),
               Center(
                 child: Text(
@@ -112,9 +113,11 @@ class OtpScreen extends GetView<OtpScreenController> {
                 ),
               ),
               vGap(20),
-              _otptextField(context),
-              vGap(20),
-              _buttonView(context),
+              _otptextField(context: context),
+              // vGap(05),
+              _buildResentOtp(context:context),
+              vGap(10),
+              _buttonView(context: context),
             ],
           ),
         ),
@@ -122,7 +125,7 @@ class OtpScreen extends GetView<OtpScreenController> {
     );
   }
 
-  _imageField(BuildContext context) {
+  _imageField({required BuildContext context}) {
     final imageSize = MediaQuery.of(context).size * 1 / 2;
     return Container(
       alignment: Alignment.center,
@@ -134,7 +137,7 @@ class OtpScreen extends GetView<OtpScreenController> {
     );
   }
 
-  _otptextField(BuildContext context) {
+  _otptextField({required BuildContext context}) {
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
@@ -179,7 +182,7 @@ class OtpScreen extends GetView<OtpScreenController> {
     );
   }
 
-  _buttonView(BuildContext context) {
+  _buttonView({required BuildContext context}) {
     return Padding(
         padding: const EdgeInsets.all(12.0),
         child: ElevatedButton(
@@ -200,4 +203,32 @@ class OtpScreen extends GetView<OtpScreenController> {
               style: MontserratStyles.montserratMediumTextStyle(size: 20),
             )));
   }
+
+  Widget _buildResentOtp({required BuildContext context}){
+    return Text.rich(
+      TextSpan(
+          text: "Didn't receive the OTP? ".tr,
+          style:
+          MontserratStyles.montserratBoldTextStyle(size: 14, color: Colors.black45),
+          children: [
+            TextSpan(
+              text: "Resend Now".tr,
+              recognizer: new TapGestureRecognizer()
+                ..onTap = /*controller.resendCode*/
+                controller.enableResend ? controller.resendCode : null,
+              style: MontserratStyles.montserratBoldTextStyle(
+                  size: 14,
+                  color: controller.enableResend ? appcolor : darkBlue),
+            ),
+          ]),
+      textAlign: TextAlign.center,
+      style: const TextStyle(
+        color: Colors.black,
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+      ),
+    ).paddingSymmetric(vertical: 30, horizontal: 0);
+  }
+
 }
+

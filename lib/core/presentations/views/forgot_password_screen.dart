@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
 import 'package:guide_banaras/constants/colors.dart';
 import 'package:guide_banaras/constants/extensions/extention_validate.dart';
@@ -122,23 +123,9 @@ class ForgotPasswordScreen extends GetView<ForgotPasswordController> {
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: Icon(FeatherIcons.mail),
         hintText: 'Email'.tr,
         labletext: 'Email'.tr,
-      ),
-    );
-  }
-
-  _passwordtextField(BuildContext cotnext) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-      child: CustomTextField(
-        // readOnly: true,
-        hintText: 'Password'.tr,
-        labletext: 'Password'.tr,
-        // obsecureText: ,
-        validator: (value) {
-          return value?.validatePassword();
-        },
       ),
     );
   }

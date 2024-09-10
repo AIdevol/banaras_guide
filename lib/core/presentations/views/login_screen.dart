@@ -1,24 +1,26 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:guide_banaras/constants/colors.dart';
 import 'package:guide_banaras/constants/extensions/extention_validate.dart';
 import 'package:guide_banaras/constants/images.dart';
 import 'package:guide_banaras/constants/navigation.dart';
+import 'package:guide_banaras/core/presentations/controllers/login_screen_controller.dart';
 import 'package:guide_banaras/utilities/google_textfields.dart';
 import 'package:guide_banaras/utilities/helper_widgets.dart';
 import 'package:guide_banaras/utilities/text_fields_decorative.dart';
 import 'package:http/http.dart';
 
-class LoginScreen extends GetView {
+class LoginScreen extends GetView<LoginScreenController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomInset: false, // Add this line
 
-        body: SafeArea(
+        body: MyAnnotatedRegion(child:  GetBuilder<LoginScreenController>(builder: (controller)=>SafeArea(
           child: Stack(
             children: [
               Column(
@@ -35,7 +37,7 @@ class LoginScreen extends GetView {
                   child: _mainScreen(context))
             ],
           ),
-        ));
+        ))));
   }
 
   _upperContainer(BuildContext context) {
@@ -85,8 +87,8 @@ class LoginScreen extends GetView {
                 child: _imageField(context),
               ),
               vGap(10),
-              _emailtextField(context),
-              _passwordtextField(context),
+              _emailtextField(context: context),
+              _passwordtextField(context: context),
               _forgotPasswordView(context),
               _buttonView(context),
               vGap(10),
@@ -111,28 +113,45 @@ class LoginScreen extends GetView {
     );
   }
 
-  _emailtextField(BuildContext context) {
+  _emailtextField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: Icon(FeatherIcons.mail),
         hintText: 'Email'.tr,
         labletext: 'Email'.tr,
+        controller: controller.emailController,
       ),
     );
   }
 
-  _passwordtextField(BuildContext cotnext) {
+  _passwordtextField({required BuildContext context}) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
       child: CustomTextField(
         // readOnly: true,
+        prefix: Icon(FeatherIcons.lock),
         hintText: 'Password'.tr,
         labletext: 'Password'.tr,
-        // obsecureText: ,
+        controller: controller.passwordController,
+        obsecureText: controller.obsecurePassword,
+        onFieldSubmitted: (String? value) {
+          FocusScope.of(Get.context ?? context)
+              .requestFocus(controller.passwordFocusNode);
+        },
         validator: (value) {
           return value?.validatePassword();
         },
+        suffix: IconButton(onPressed: (){
+          controller.showOrHidePasswordVisibility();
+        },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            icon: controller.obsecurePassword
+                ?const Icon(Icons.visibility_off, color: Colors.grey,):
+            Icon(Icons.visibility, color: appcolor,)),
+        focusNode: controller.passwordFocusNode,
       ),
     );
   }
@@ -170,7 +189,7 @@ class LoginScreen extends GetView {
             child: Text(
               'Forgot Password',
               style: MontserratStyles.montserratRegularTextStyle(
-                  size: 15, color: Colors.black),
+                  size: 15, color: darkBlue),
             ))
       ],
     );
